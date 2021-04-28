@@ -37,11 +37,6 @@ app.post('/api/shorturl', (req, res) => {
   });
 })
 
-// Your first API endpoint
-app.get('/api/hello', function (req, res) {
-  res.json({ greeting: 'hello API' });
-});
-
 app.get('/api/shorturl/:short', (req, res) => {
   if (!req.params || !req.params.short) return;
   URL.findOne({ shortUrl: parseInt(req.params.short) }, (err, data) => {
@@ -49,6 +44,8 @@ app.get('/api/shorturl/:short', (req, res) => {
     res.redirect(data.longUrl);
   });
 });
+
+
 
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
