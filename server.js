@@ -42,7 +42,7 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-app.get('/api/:short', (req, res) => {
+app.get('/shorturl/:short', (req, res) => {
   if (!req.params || !req.params.short) return;
   URL.findOne({ shortUrl: parseInt(req.params.short) }, (err, data) => {
     if (err) return console.log(err);
