@@ -11,7 +11,7 @@ const { Schema } = mongoose;
 const port = process.env.PORT || 3000;
 
 // Connect to mongoose db
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 const urlSchema = new Schema({
   shortUrl: Number,
@@ -53,7 +53,7 @@ app.listen(port, function () {
 
 var createAndSaveUrl = (long, done) => {
   URL.find()
-    .sort("shortUrl")
+    .sort({"shortUrl": -1})
     .limit(1)
     .exec((error, data) => {
       if (error) return console.log(error);
@@ -61,6 +61,7 @@ var createAndSaveUrl = (long, done) => {
       if (data.length == 0) {
         newUrl = new URL({ shortUrl: 0, longUrl: long });
       } else {
+        console.log(data);
         newUrl = new URL({ shortUrl: data[0].shortUrl + 1, longUrl: long });
       }
       newUrl.save((err, data) => {
